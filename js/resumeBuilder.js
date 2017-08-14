@@ -63,12 +63,11 @@ var education = {
            url: "http://ksu.edu.sa/"
 		}
 		],
-      display: function(appendAfter){
-		  
+      display: function(appendTo){
+		  appendTo.append(HTMLschoolStart);
+		  var schoolDiv = $('.education-entry');
 		  this.schools.forEach(function(val){
-			  appendAfter.append(HTMLschoolStart);
 			  
-			  var schoolDiv = $('.education-entry').last();
 			  var name  = HTMLschoolName.replace("%data%",val.name);
 			  var dgree = HTMLschoolDegree.replace(" -- %data%",val.degree);
 			  schoolDiv.append(name+" - "+dgree);
@@ -76,10 +75,13 @@ var education = {
 			  schoolDiv.append(HTMLschoolLocation.replace("%data%",val.location));
 			  schoolDiv.append(HTMLschoolMajor.replace("%data%",val.majors));
 		  });
-		  appendAfter.append(HTMLonlineClasses);
+		  appendTo.append(HTMLonlineClasses);
+		  
+		  appendTo.append(HTMLschoolStart);
+		  var onlineCoursesDiv = $('.education-entry').last();
+		  
 		  this.onlineCourses.forEach(function(val){
-			  appendAfter.append(HTMLschoolStart);
-			  var onlineCoursesDiv = $('.education-entry').last();
+			  
 			  var title  = HTMLonlineTitle.replace("%data%",val.title);
 			  var school = HTMLonlineSchool.replace("%data%",val.school);
 			  onlineCoursesDiv.append(title+school);
@@ -108,13 +110,15 @@ var work = {
 			   description: "Bulding Asp.net applications and WCF services" 
 	    }
 	],
-      display: function(appendAfter){
+      display: function(appendTo){
+		  
+
 		  this.jobs.forEach(function(val){
-				  
-			      //append work div
-			  	  appendAfter.append(HTMLworkStart);
+			  	  
+				  //append work div
+			  	  appendTo.append(HTMLworkStart);
+			  	  var workEntry = appendTo.find('.work-entry').last();
 			  
-			  	  var workEntry = appendAfter.find('.work-entry').last();
 			      var emp = HTMLworkEmployer.replace("%data%",val.employer);
 			      var title = HTMLworkTitle.replace("%data%",val.title);
 			  	  //appdend job info
@@ -132,33 +136,38 @@ var projects = {
             title: "Animal Trading", 
             dates: "12-3-2017",
             description: "Web page with animal card with picture of the animal and some info",
-            images: ["images/github-logo.svg",""]
+            images: ["images/github-logo.svg"]
 		},
 		{
             title: "Portfolio", 
             dates: "12-8-2017",
             description: "Build my own Portfolio",
-            images: ["images/fry.jpg",""]
+            images: ["images/fry.jpg"]
 		}
 		],
-      display: function(appendAfter){
+      display: function(appendTo){
+		  
+		  		  //append project div
+			  	  appendTo.append(HTMLprojectStart);
+				  // get div to putt stuff indside	  
+			  	  var projectEntry = appendTo.find('.project-entry');
+					  
+
 		          this.projects.forEach(function(val){
 			      
-				  //append work div
-			  	  appendAfter.append(HTMLprojectStart);
-			  	  var projectEntry = appendAfter.find('.project-entry').last();		  		 
-		  		  projectEntry.append(HTMLprojectTitle.replace("%data%",val.title));
-			  	  projectEntry.append(HTMLprojectDates.replace("%data%",val.dates));
-			      projectEntry.append(HTMLprojectDescription.replace("%data%",val.description));
-			      for(var i=0; i<val.images.length;i++){	  
-			      		projectEntry.append(HTMLprojectImage.replace("%data%",val.images[i]));
-					} 
+				  		  projectEntry.append(HTMLprojectTitle.replace("%data%",val.title));
+			  	  		  projectEntry.append(HTMLprojectDates.replace("%data%",val.dates));
+			      		  projectEntry.append(HTMLprojectDescription.replace("%data%",val.description));
+					  
+			      		  for(var i=0; i<val.images.length;i++){	  
+			      						projectEntry.append(HTMLprojectImage.replace("%data%",val.images[i]));
+						  } 
 				  });
 		          
 	  }
 }
 
-//Sections to append Html elements to
+//selector to append Html elements to
 var header = $('#header');
 var topContacts = $('#topContacts');
 var workExperience = $('#workExperience');
@@ -172,6 +181,7 @@ bio.display(header);
 work.display(workExperience);
 projects.display(projectsContainer);
 education.display(educationContainer);
+
 
 function appendContacts(container){
 	
