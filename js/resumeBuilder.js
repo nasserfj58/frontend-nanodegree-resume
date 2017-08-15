@@ -38,7 +38,7 @@ var bio = {
 			skillsList.append(getReplaced(HTMLskills,val));
 		});
 }
-}
+};
 
 var education = {
 	 schools: [
@@ -109,7 +109,7 @@ var education = {
 			  });
 
 	  }	
-}
+};
 
 var work = {
 	jobs: [
@@ -149,7 +149,7 @@ var work = {
 			  	  appendMultiple(workEntry,job);
 		  });
 	  }
-}
+};
 
 var projects = {
 	projects: [
@@ -190,7 +190,7 @@ var projects = {
 					  	 appendMultiple(projectEntry,[title,dates,desc,imgs]);	  
 			      });          
 	  }
-}
+};
 
 //selector to append Html elements to
 var header = $('#header');
@@ -209,7 +209,7 @@ projects.display(projectsContainer);
 education.display(educationContainer);
 
 //append googleMap
-$('#mapDiv').append(googleMap);;
+$('#mapDiv').append(googleMap);
 
 
 //appends multiple elements to a single container  
@@ -218,10 +218,10 @@ function appendMultiple(selector, appends){
 	for(var i=0;i<appends.length;i++){
 		
 		if(Object.prototype.toString.call( appends[i] ) === '[object Array]'){
-				
-			appends[i].forEach(function(val){
-					selector.append(val);	
-			});
+			
+			for(var j=0; j<appends[i].length; j++){
+				selector.append(appends[i][j]);
+			}
 		}
 		else{
 			selector.append(appends[i]);
