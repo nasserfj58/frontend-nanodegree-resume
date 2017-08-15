@@ -33,8 +33,9 @@ var bio = {
 		 //find slills <ul> 
 		 var skillsList = $('#skills');
 		  
+		 //append skills 
 		 this.skills.forEach(function(val){
-			skillsList.append(HTMLskills.replace(placeHolder,val));
+			skillsList.append(getReplaced(HTMLskills,val));
 		});
 }
 }
@@ -169,6 +170,7 @@ var projects = {
 		  
 		  		  //append project div
 			  	  appendTo.append(HTMLprojectStart);
+		  
 				  // get project div  
 			  	  var projectEntry = appendTo.find('.project-entry');
 
@@ -185,10 +187,8 @@ var projects = {
 						  } 
 					  
 					     //append project info
-					  	 appendMultiple(projectEntry,[title,dates,desc,imgs]);
-			      		  
-			      });
-		          
+					  	 appendMultiple(projectEntry,[title,dates,desc,imgs]);	  
+			      });          
 	  }
 }
 
