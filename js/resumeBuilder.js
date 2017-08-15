@@ -44,7 +44,7 @@ var education = {
 	 schools: [
 		 {
 			name: "King Saud Univirsity",
-           location: "Ryiadh",
+           location: "King Saud University, King Khalid Road, Riyadh",
            degree: "Bachelor",
            majors: "Software Engineer",
            dates: "1-1-2016",
@@ -56,7 +56,7 @@ var education = {
            title: "WCF",
            school: "PlureSight",
            dates: "12-12-2016",
-           url: "Pluresight.com"
+           url: "https://pluralsight.com"
 		},
 		{
            title: "MicroSoft SharePoint",
@@ -99,7 +99,7 @@ var education = {
 			  var title  = getReplaced(HTMLonlineTitle,val.title);
 			  var school = getReplaced(HTMLonlineSchool,val.school);
 			  var dates  = getReplaced(HTMLonlineDates,val.dates);
-			  var url    = getReplaced(HTMLonlineURL,val.url);
+			  var url    = getReplaced(HTMLonlineURL,val.school).replace("#",val.url);
 			  
 			  var course = [(title+school),dates,url];
 			  
@@ -157,13 +157,13 @@ var projects = {
             title: "Animal Trading", 
             dates: "12-3-2017",
             description: "Web page with animal card with picture of the animal and some info",
-            images: ["images/github-logo.svg"]
+            images: ["http://via.placeholder.com/200x163"]
 		},
 		{
             title: "Portfolio", 
             dates: "12-8-2017",
             description: "Build my own Portfolio",
-            images: ["images/fry.jpg"]
+            images: ["http://via.placeholder.com/200x163"]
 		}
 		],
       display: function(appendTo){
@@ -207,6 +207,9 @@ bio.display(header);
 work.display(workExperience);
 projects.display(projectsContainer);
 education.display(educationContainer);
+
+//append googleMap
+$('#mapDiv').append(googleMap);;
 
 
 //appends multiple elements to a single container  
