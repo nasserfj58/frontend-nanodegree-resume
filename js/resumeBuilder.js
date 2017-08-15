@@ -15,7 +15,7 @@ var bio = {
       biopic: "images/197x148.gif",
       display: function(appendTo){
 		 
-		 //append header
+		 //append header div
 		 appendTo.prepend(HTMLheaderName.replace("%data%",this.name)+HTMLheaderRole.replace("%data%",this.role));
 		 
 		 //append header contacts
@@ -23,15 +23,14 @@ var bio = {
 		//appednd footer contacts
 		 appendContacts(connect); 
 		  
-		 //append bio
+		 //append bio ifno
 		 appendTo.append(HTMLbioPic.replace("%data%",this.biopic));
 		 appendTo.append(HTMLwelcomeMsg.replace("%data%",this.welcomeMessage));
 		 appendTo.append(HTMLskillsStart);
 		 
-		 //slills <ul> 
+		 //find slills <ul> 
 		 var skillsList = $('#skills');
 		  
-		 //append to slills <ul>
 		 this.skills.forEach(function(val){
 			skillsList.append(HTMLskills.replace("%data%",val));
 		});
@@ -64,19 +63,27 @@ var education = {
 		}
 		],
       display: function(appendTo){
+		  //append education div
 		  appendTo.append(HTMLschoolStart);
+		  
 		  var schoolDiv = $('.education-entry');
-		  this.schools.forEach(function(val){
+		  
+		  this.schools.forEach(function(val){	  
 			  
 			  var name  = HTMLschoolName.replace("%data%",val.name);
 			  var dgree = HTMLschoolDegree.replace(" -- %data%",val.degree);
+			  
+			  //append schools info
 			  schoolDiv.append(name+" - "+dgree);
 			  schoolDiv.append(HTMLschoolDates.replace("%data%",val.dates));
 			  schoolDiv.append(HTMLschoolLocation.replace("%data%",val.location));
 			  schoolDiv.append(HTMLschoolMajor.replace("%data%",val.majors));
 		  });
+		  
+		  //append courses header
 		  appendTo.append(HTMLonlineClasses);
 		  
+		  //append education div for online courses
 		  appendTo.append(HTMLschoolStart);
 		  var onlineCoursesDiv = $('.education-entry').last();
 		  
@@ -84,10 +91,11 @@ var education = {
 			  
 			  var title  = HTMLonlineTitle.replace("%data%",val.title);
 			  var school = HTMLonlineSchool.replace("%data%",val.school);
+			  
+			  //append online courses info
 			  onlineCoursesDiv.append(title+school);
 			  onlineCoursesDiv.append(HTMLonlineDates.replace("%data%",val.dates));
 			  onlineCoursesDiv.append(HTMLonlineURL.replace("%data%",val.url));
-			  
 		  });
 
 	  }	
@@ -149,12 +157,12 @@ var projects = {
 		  
 		  		  //append project div
 			  	  appendTo.append(HTMLprojectStart);
-				  // get div to putt stuff indside	  
+				  // get project div  
 			  	  var projectEntry = appendTo.find('.project-entry');
-					  
 
 		          this.projects.forEach(function(val){
-			      
+					  
+			      		  //append project info
 				  		  projectEntry.append(HTMLprojectTitle.replace("%data%",val.title));
 			  	  		  projectEntry.append(HTMLprojectDates.replace("%data%",val.dates));
 			      		  projectEntry.append(HTMLprojectDescription.replace("%data%",val.description));
@@ -183,10 +191,10 @@ projects.display(projectsContainer);
 education.display(educationContainer);
 
 
-function appendContacts(container){
+function appendContacts(selctor){
 	
-		 container.append(HTMLmobile.replace("%data%",bio.contacts.mobile));
-		 container.append(HTMLtwitter.replace("%data%",bio.contacts.twitter));
-		 container.append(HTMLgithub.replace("%data%",bio.contacts.github));
-		 container.append(HTMLlocation.replace("%data%",bio.contacts.location));
+		 selctor.append(HTMLmobile.replace("%data%",bio.contacts.mobile));
+		 selctor.append(HTMLtwitter.replace("%data%",bio.contacts.twitter));
+		 selctor.append(HTMLgithub.replace("%data%",bio.contacts.github));
+		 selctor.append(HTMLlocation.replace("%data%",bio.contacts.location));
 }
