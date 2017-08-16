@@ -237,12 +237,13 @@ function getReplaced(htmlText,dataToreplace){
 
 function appendContacts(selectors){
 	
-		selectors.forEach(function(selctor){
+		for(vari=0; i<selectors.length; i++){
 			
-		 selctor.append(HTMLmobile.replace(placeHolder,bio.contacts.mobile));
-		 selctor.append(HTMLtwitter.replace(placeHolder,bio.contacts.twitter));
-		 selctor.append(HTMLgithub.replace(placeHolder,bio.contacts.github));
-		 selctor.append(HTMLlocation.replace(placeHolder,bio.contacts.location));
+				selectors[i].append(HTMLmobile.replace(placeHolder,bio.contacts.mobile));
+				selectors[i].append(HTMLtwitter.replace(placeHolder,bio.contacts.twitter));
+				selectors[i].append(HTMLgithub.replace(placeHolder,bio.contacts.github));
+		 		selectors[i].append(HTMLlocation.replace(placeHolder,bio.contacts.location));
+		}
 			
 		});
 		 
