@@ -171,14 +171,14 @@ span {
   padding: 5px;
 }
 
-#lets-connect {
+#lets-bottomContact {
   text-align: center;
 }
 
 /* Media queries to handle various device widths */
 
 @media only screen and (max-width: 1024px) {
-  #lets-connect {
+  #lets-bottomContact {
     margin-top: 5%;
   }
 }
@@ -190,7 +190,7 @@ span {
 }
 
 @media only screen and (max-width: 750px) {
-  #lets-connect {
+  #lets-bottomContact {
     margin-top: 10%;
   }
   .biopic {

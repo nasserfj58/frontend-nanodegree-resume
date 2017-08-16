@@ -1513,8 +1513,8 @@ setDocument = Sizzle.setDocument = function( node ) {
 
     assert(function( div ) {
       // Check to see if it's possible to do matchesSelector
-      // on a disconnected node (IE 9)
-      support.disconnectedMatch = matches.call( div, "div" );
+      // on a disbottomContacted node (IE 9)
+      support.disbottomContactedMatch = matches.call( div, "div" );
 
       // This should fail with an exception
       // Gecko does not error, returns false instead
@@ -1569,7 +1569,7 @@ setDocument = Sizzle.setDocument = function( node ) {
     var compare = b.compareDocumentPosition && a.compareDocumentPosition && a.compareDocumentPosition( b );
 
     if ( compare ) {
-      // Disconnected nodes
+      // DisbottomContacted nodes
       if ( compare & 1 ||
         (!support.sortDetached && b.compareDocumentPosition( a ) === compare) ) {
 
@@ -1606,7 +1606,7 @@ setDocument = Sizzle.setDocument = function( node ) {
       hasDuplicate = true;
       return 0;
 
-    // Parentless nodes are either documents or disconnected
+    // Parentless nodes are either documents or disbottomContacted
     } else if ( !aup || !bup ) {
       return a === doc ? -1 :
         b === doc ? 1 :
@@ -1669,9 +1669,9 @@ Sizzle.matchesSelector = function( elem, expr ) {
     try {
       var ret = matches.call( elem, expr );
 
-      // IE 9's matchesSelector returns false on disconnected nodes
-      if ( ret || support.disconnectedMatch ||
-          // As well, disconnected nodes are said to be in a document
+      // IE 9's matchesSelector returns false on disbottomContacted nodes
+      if ( ret || support.disbottomContactedMatch ||
+          // As well, disbottomContacted nodes are said to be in a document
           // fragment in IE 9
           elem.document && elem.document.nodeType !== 11 ) {
         return ret;
@@ -8308,7 +8308,7 @@ Tween.propHooks = {
 };
 
 // Support: IE9
-// Panic based approach to setting things on disconnected nodes
+// Panic based approach to setting things on disbottomContacted nodes
 
 Tween.propHooks.scrollTop = Tween.propHooks.scrollLeft = {
   set: function( tween ) {
@@ -8602,7 +8602,7 @@ jQuery.fn.offset = function( options ) {
 
   docElem = doc.documentElement;
 
-  // Make sure it's not a disconnected DOM node
+  // Make sure it's not a disbottomContacted DOM node
   if ( !jQuery.contains( docElem, elem ) ) {
     return box;
   }
