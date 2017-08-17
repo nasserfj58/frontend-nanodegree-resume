@@ -30,13 +30,11 @@ var bio = {
 		 //append bio info
 		 appendMultiple(appendTo,bioInfo);
 
-		 //find slills <ul> 
+		 //find slkills <ul> 
 		 var skillsList = $('#skills');
 		  
-		 //append skills 
-		 this.skills.forEach(function(val){
-			skillsList.append(getReplaced(HTMLskills,val));
-		});
+		 //append skill <li>s to skills <ul>
+		 skillsList.append(getReplaced(HTMLskills,this.skills));  
 }
 };
 
@@ -46,7 +44,7 @@ var education = {
 			name: "King Saud Univirsity",
            location: "King Saud University, King Khalid Road, Riyadh",
            degree: "Bachelor",
-           majors: "Software Engineer",
+           majors: ["Software Engineer"],
            dates: "1-1-2016",
            url: "http://ksu.edu.sa/" 
 		 }
@@ -78,8 +76,9 @@ var education = {
 			  var dgree  = HTMLschoolDegree.replace(" -- %data%",val.degree);
 			  var dates  = getReplaced(HTMLschoolDates,val.dates);
 			  var locat  = getReplaced(HTMLschoolLocation,val.location);
-			  var major  = getReplaced(HTMLschoolMajor,val.majors);
-			  var school = [name+" - "+dgree,dates,location,major];
+			  var majors  = getReplaced(HTMLschoolMajor,val.majors);
+			  
+			  var school = [name+" - "+dgree,dates,location,majors];
 			  
 			  //append schoolinfo
 			  appendMultiple(schoolDiv,school);
@@ -143,6 +142,7 @@ var work = {
 			      var dates = getReplaced(HTMLworkDates,val.dates);
 			      var loc   = getReplaced(HTMLworkLocation,val.location);
 			  	  var desc  = getReplaced(HTMLworkDescription,val.description);
+			  
 			      var job   = [(emp+title),dates,loc,desc];
 			  
 			  	  //appdend job info
@@ -176,18 +176,15 @@ var projects = {
 
 		          this.projects.forEach(function(val){
 					  
-					  	var title  = getReplaced(HTMLprojectTitle,val.title);
-					    var dates  = getReplaced(HTMLprojectTitle,val.dates);
-					    var desc   = getReplaced(HTMLprojectDescription,val.description);
-					    var length = val.images.length;
-					  	var imgs=[];
-					  	
-					    for(var i= length-1; i>=0; i--){	  
-			      			imgs.push(getReplaced(HTMLprojectImage,val.images[i]));			
-						  } 
-					  
-					     //append project info
-					  	 appendMultiple(projectEntry,[title,dates,desc,imgs]);	  
+					  	var title   = getReplaced(HTMLprojectTitle,val.title);
+					    var dates   = getReplaced(HTMLprojectTitle,val.dates);
+					    var desc    = getReplaced(HTMLprojectDescription,val.description);
+					  	var imgs    = getReplaced(HTMLprojectImage,val.images);
+					    
+					  	var project = [title,dates,desc,imgs];
+					  	 
+					    //append project info
+					    appendMultiple(projectEntry, project);	  
 			      });          
 	  }
 };
@@ -217,7 +214,7 @@ function appendMultiple(selector, appends){
 	 
 	for(var i=0;i<appends.length;i++){
 		
-		if(Object.prototype.toString.call( appends[i] ) === '[object Array]'){
+		if( isArray(appends[i]) ){
 			
 			for(var j=0; j<appends[i].length; j++){
 				selector.append(appends[i][j]);
@@ -232,19 +229,37 @@ function appendMultiple(selector, appends){
 
 function getReplaced(htmlText,dataToreplace){
 	
-	return htmlText.replace(placeHolder,dataToreplace);
+	if( isArray(dataToreplace) ){
+		
+		var array= [];
+		
+		for(var i= dataToreplace.length-1; i>=0; i--){	  
+			     
+			array.push(getReplaced(htmlText,dataToreplace[i]));			
+		}
+		
+		return array;
+	}
+	else{
+		return htmlText.replace(placeHolder,dataToreplace);
+	}
 }
 
 function appendContacts(selectors){
 	
-		for(vari=0; i<selectors.length; i++){
+		for(var i=0; i<selectors.length; i++){
 			
 				selectors[i].append(HTMLmobile.replace(placeHolder,bio.contacts.mobile));
 				selectors[i].append(HTMLtwitter.replace(placeHolder,bio.contacts.twitter));
 				selectors[i].append(HTMLgithub.replace(placeHolder,bio.contacts.github));
 		 		selectors[i].append(HTMLlocation.replace(placeHolder,bio.contacts.location));
-		}
-			
-		});
-		 
+		}		
+}
+
+function isArray(object){
+	
+	if(Object.prototype.toString.call( object ) === '[object Array]')
+		return true;
+	
+	return false;
 }
